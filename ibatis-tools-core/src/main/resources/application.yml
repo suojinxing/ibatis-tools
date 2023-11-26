@@ -1,0 +1,23 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: WORKP-BATIS-TOOLS
+  datasource:
+    url: jdbc:mysql://localhost:3306/mybatis_demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#eureka:
+#  client:
+#    registerWithEureka: true # 是否注册到eureka服务，默认为true，当前已为eureka server，且单点eureka，故配置为false
+#    fetchRegistry: false # eureka之间如果网络不稳定，客户端一般也会缓存了注册列表，因此eureka服务可以不缓存，我觉得更能确保eureka之间的一致。
+#    serviceUrl:
+#      defaultZone: http://127.0.0.1:9000/eureka/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml    # mapper映射文件位置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #用于控制台打印sql语句
+logging:
+  level:
+    root: info
