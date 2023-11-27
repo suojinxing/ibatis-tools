@@ -10,18 +10,28 @@
   <name>ibatis-tools</name>
   <modules>
     <module>ibatis-tools-core</module>
-    <module>workp-common</module>
+    <module>ibatis-tools-boot</module>
   </modules>
 
   <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <workp.common.version>1.0-SNAPSHOT</workp.common.version>
+    <mysqlDriver.version>8.0.28</mysqlDriver.version>
+    <lombok.version>1.18.24</lombok.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.28</version>
+      <version>${mysqlDriver.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.workp</groupId>
+      <artifactId>workp-common</artifactId>
+      <version>${workp.common.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -34,7 +44,9 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
       <optional>true</optional>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

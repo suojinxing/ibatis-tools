@@ -9,6 +9,11 @@ import lombok.*;
 @Builder
 public class Result<T> {
     private T data;
-    private CodeEnum code;
+    private String code;
     private String message;
+
+
+    public static <T> Result<T> success() {
+        return new Result<>();
+    }
 }

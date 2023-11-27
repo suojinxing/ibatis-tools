@@ -10,6 +10,7 @@ public enum CodeEnum {
     SUCCESS("000000", "正常"),
     ;
 
+
     private final String code;
     private final String desc;
 }
