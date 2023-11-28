@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan("org.workp")
-@MapperScan("org.workp.core.infrastructure.repository.mapper")
+@MapperScan("org.workp.core.infrastructure.mapper")
 public class IBatisToolsApplication {
     public static void main(String[] args) {
         SpringApplication.run(IBatisToolsApplication.class, args);

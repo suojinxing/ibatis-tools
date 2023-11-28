@@ -1,4 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.workp.core.infrastructure.repository.mapper.IBatisLogMapper">
+<mapper namespace="org.workp.core.infrastructure.mapper.IBatisLogMapper">
+
+  <resultMap id="BaseResultMap" type="org.workp.core.infrastructure.po.IBatisLogPo">
+    <id property="id" column="id" jdbcType="INTEGER"/>
+    <result property="originLogStr" column="origin_log_str" jdbcType="VARCHAR"/>
+    <result property="parsedResultStr" column="parsed_result_str" jdbcType="VARCHAR"/>
+    <result property="startDateTime" column="start_datetime" jdbcType="DATETIMEOFFSET"/>
+    <result property="endDateTime" column="end_datetime" jdbcType="DATETIMEOFFSET"/>
+    <result property="duration" column="duration" jdbcType="BIGINT"/>
+    <result property="ip" column="ip" jdbcType="BIGINT"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id,origin_log_str,parsed_result_str,start_datetime,end_datetime,duration,ip
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ibatis_log
+    where  id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ibatis_log
+    where  id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.workp.core.infrastructure.po.IBatisLogPo" useGeneratedKeys="true">
+    insert into ibatis_log
+    ( id,origin_log_str,parsed_result_str
+    ,start_datetime,end_datetime,duration
+    ,ip)
+    values (#{id,jdbcType=INTEGER},#{originLogStr,jdbcType=VARCHAR},#{parsedResultStr,jdbcType=VARCHAR}
+           ,#{startDateTime,jdbcType=TIMESTAMP},#{endDateTime,jdbcType=TIMESTAMP},#{duration,jdbcType=BIGINT}
+           ,#{ip,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.workp.core.infrastructure.po.IBatisLogPo" useGeneratedKeys="true">
+    insert into ibatis_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="originLogStr != null">origin_log_str,</if>
+      <if test="parsedResultStr != null">parsed_result_str,</if>
+      <if test="startDateTime != null">start_datetime,</if>
+      <if test="endDateTime != null">end_datetime,</if>
+      <if test="duration != null">duration,</if>
+      <if test="ip != null">ip,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=INTEGER},</if>
+      <if test="originLogStr != null">#{originLogStr,jdbcType=VARCHAR},</if>
+      <if test="parsedResultStr != null">#{parsedResultStr,jdbcType=VARCHAR},</if>
+      <if test="startDateTime != null">#{startDateTime,jdbcType=TIMESTAMP},</if>
+      <if test="endDateTime != null">#{endDateTime,jdbcType=TIMESTAMP},</if>
+      <if test="duration != null">#{duration,jdbcType=BIGINT},</if>
+      <if test="ip != null">#{ip,jdbcType=BIGINT},</if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.workp.core.infrastructure.po.IBatisLogPo">
+    update ibatis_log
+    <set>
+      <if test="originLogStr != null">
+        origin_log_str = #{originLogStr,jdbcType=VARCHAR},
+      </if>
+      <if test="parsedResultStr != null">
+        parsed_result_str = #{parsedResultStr,jdbcType=VARCHAR},
+      </if>
+      <if test="startDateTime != null">
+        start_datetime = #{startDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDateTime != null">
+        end_datetime = #{endDateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=BIGINT},
+      </if>
+    </set>
+    where   id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.workp.core.infrastructure.po.IBatisLogPo">
+    update ibatis_log
+    set
+      origin_log_str =  #{originLogStr,jdbcType=VARCHAR},
+      parsed_result_str =  #{parsedResultStr,jdbcType=VARCHAR},
+      start_datetime =  #{startDateTime,jdbcType=TIMESTAMP},
+      end_datetime =  #{endDateTime,jdbcType=TIMESTAMP},
+      duration =  #{duration,jdbcType=BIGINT},
+      ip =  #{ip,jdbcType=BIGINT}
+    where   id = #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>

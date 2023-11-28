@@ -1,4 +1,4 @@
-package org.workp.core.interfaces.rest.dto;
+package org.workp.core.interaction.rest.dto;
 
 import lombok.Data;
 

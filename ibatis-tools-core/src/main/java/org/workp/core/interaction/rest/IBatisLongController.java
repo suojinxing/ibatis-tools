@@ -1,4 +1,4 @@
-package org.workp.core.interfaces.rest;
+package org.workp.core.interaction.rest;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,11 +8,13 @@ import org.workp.common.http.Result;
 import org.workp.core.application.commandservice.IBatisLogCommandService;
 import org.workp.core.domain.command.ParseLogCommand;
 import org.workp.core.domain.model.valueobject.ParsedLog;
-import org.workp.core.infrastructure.repository.mapper.IBatisLogMapper;
-import org.workp.core.interfaces.rest.assembler.IBatisLogCommandDtoAssembler;
-import org.workp.core.interfaces.rest.dto.ParsedLogDto;
+import org.workp.core.infrastructure.IpUtils;
+import org.workp.core.infrastructure.mapper.IBatisLogMapper;
+import org.workp.core.interaction.rest.assembler.IBatisLogCommandDtoAssembler;
+import org.workp.core.interaction.rest.dto.ParsedLogDto;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -24,8 +26,8 @@ public class IBatisLongController {
     private IBatisLogMapper mapper;
 
     @PostMapping("/parse")
-    public Result parseLog(@RequestBody @Valid ParsedLogDto dto) {
-        ParseLogCommand command = IBatisLogCommandDtoAssembler.toCommand(dto);
+    public Result parseLog(@RequestBody @Valid ParsedLogDto dto, HttpServletRequest request) {
+        ParseLogCommand command = IBatisLogCommandDtoAssembler.toCommand(dto,request);
         ParsedLog result = iBatisLogCommandService.parseLog(command);
         return Result.builder().data(result).build();
     }

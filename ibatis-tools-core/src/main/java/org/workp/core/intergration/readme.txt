@@ -1,0 +1,3 @@
+intergration包作用：
+intergration是集成的意思，他与interaction相对应。
+针对限界上下文来说interaction是数据入站操作。intergration是数据出站操作
