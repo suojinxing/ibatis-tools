@@ -1,6 +1,5 @@
 package org.workp.core.infrastructure.repository;
 
-import cn.hutool.core.net.Ipv4Util;
 import org.springframework.stereotype.Repository;
 import org.workp.core.domain.model.aggregate.IBatisLog;
 import org.workp.core.domain.repository.IBatisLogRepository;
@@ -19,15 +18,7 @@ public class IBatisLogRepositoryImpl implements IBatisLogRepository {
 
     @Override
     public void save(IBatisLog iBatisLog) {
-        //IBatisLogPo po = iBatisLogFactory.toPo(iBatisLog);
-        IBatisLogPo po = new IBatisLogPo();
-        po.setOriginLogStr(iBatisLog.getOriginLogStr());
-        po.setParsedResultStr(iBatisLog.getParsedLog().getParsedResultStr());
-        po.setStartDateTime(iBatisLog.getStartDateTime());
-        po.setEndDateTime(iBatisLog.getEndDateTime());
-        po.setDuration(iBatisLog.getDuration().toMillis());
-        po.setIp(Ipv4Util.ipv4ToLong(iBatisLog.getIpAddress().getIp()));
-
+        IBatisLogPo po = iBatisLogFactory.toPo(iBatisLog);
         iBatisLogMapper.insert(po);
     }
 }

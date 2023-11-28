@@ -13,6 +13,6 @@ create table ibatis_log
     start_datetime    datetime                       not null comment '开始时间',
     end_datetime      datetime                       not null comment '结束时间',
     duration          int8                           not null comment '解析耗时（毫秒）',
-    ip                int                            not null comment '客户IP'
+    ip                int8                           not null comment '客户IP'
 ) comment 'ibatis日志表';
 ```
