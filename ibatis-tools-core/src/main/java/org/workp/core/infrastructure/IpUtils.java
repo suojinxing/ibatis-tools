@@ -1,9 +1,14 @@
 package org.workp.core.infrastructure;
 
+import lombok.extern.slf4j.Slf4j;
+import org.workp.common.enums.ExceptionCodeEnum;
+import org.workp.common.exception.BaseException;
+
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+@Slf4j
 public class IpUtils {
     private IpUtils() {
     }
@@ -26,7 +31,8 @@ public class IpUtils {
                     try {
                         inet = InetAddress.getLocalHost();
                     } catch (UnknownHostException e) {
-                        e.printStackTrace();
+                        log.error("未知异常：{}", e.getMessage());
+                        throw new BaseException(ExceptionCodeEnum.UNKNOWN_HOST, e);
                     }
                     ipAddress = inet.getHostAddress();
                 }

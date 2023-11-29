@@ -10,12 +10,23 @@ import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.workp.common.exception.BaseException;
 import org.workp.common.http.CodeEnum;
 import org.workp.common.http.Result;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(BaseException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result baseException(BaseException e) {
+        logger.error("业务基础异常 ", e);
+        Result result = new Result();
+        result.setCode(e.getErrorCode());
+        result.setMessage("未知异常");
+        return result;
+    }
 
     @ExceptionHandler(InvalidFormatException.class)
     @ResponseStatus(HttpStatus.OK)

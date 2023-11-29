@@ -16,8 +16,6 @@ spring:
 #      defaultZone: http://127.0.0.1:9000/eureka/
 mybatis:
   mapper-locations: classpath:mapper/*.xml    # mapper映射文件位置
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #用于控制台打印sql语句
 logging:
   level:
     root: info

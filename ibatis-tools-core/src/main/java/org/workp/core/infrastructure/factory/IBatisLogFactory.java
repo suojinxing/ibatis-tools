@@ -12,13 +12,13 @@ import java.time.Duration;
 
 @Mapper(componentModel = "spring", imports = {Ipv4Util.class})//交给spring管理
 public interface IBatisLogFactory {
-    @Mapping(source = "iBatisLog.parsedLog.parsedResultStr", target = "parsedResultStr")
+    @Mapping(target = "parsedResultStr", source = "iBatisLog.parsedLog.parsedResultStr")
     @Mapping(target = "duration", qualifiedByName = MapStructConst.DURATION2LONG_MILLS)
     @Mapping(target = "ip", expression = "java(Ipv4Util.ipv4ToLong(iBatisLog.getIpAddress().getIp()))")
     IBatisLogPo toPo(IBatisLog iBatisLog);
 
     @Named(value = MapStructConst.DURATION2LONG_MILLS)
-    public default long timeMillisToDateTimeStr(Duration duration) {
+    public default long DURATION2LONG_MILLS(Duration duration) {
         if (duration == null) return 0L;
         return duration.toMillis();
     }
