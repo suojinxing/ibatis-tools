@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class ParsedLogDto {
+public class IBatisLogParsedDto {
     @NotBlank
     private String originLogStr;
 }

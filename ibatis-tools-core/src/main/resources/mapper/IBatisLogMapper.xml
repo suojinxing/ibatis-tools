@@ -22,6 +22,9 @@
     from ibatis_log
     where  id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="query" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from ibatis_log
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ibatis_log

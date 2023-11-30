@@ -19,3 +19,13 @@ mybatis:
 logging:
   level:
     root: info
+    org:
+      workp:
+       core:
+        infrastructure:
+          mapper: debug
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+
