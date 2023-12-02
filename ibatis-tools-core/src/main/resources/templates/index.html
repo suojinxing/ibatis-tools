@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IBatisLog</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#parseLogBtn").click(function () {
+                let originLogStr = $("#originLogStr").val()
+                let data = {originLogStr}
+                if (!originLogStr || originLogStr.split('\n').length < 2) {
+                    alert("请输入至少两行解析内容")
+                }
+                $.ajax({
+                    url: '/ibatislog/parse',
+                    contentType: 'application/json',
+                    type: 'post',
+                    async: true,
+                    data: JSON.stringify(data)
+                }).then(result => {
+                    console.log(result)
+                    let {data} = result
+                    let {prettyParsedResultStr} = data;
+                    $("#resultStr").html(prettyParsedResultStr)
+                })
+            });
+        });
+    </script>
+    <style type="text/css">
+        #originLogStr {
+            width: 100vw;
+            height: 100px;
+        }
+
+        #parseLogBtn {
+            width: 100px;
+            height: 32px;
+            background-color: #aad2ff;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>mybatis sql解析</h1>
+<textarea id="originLogStr"></textarea>
+<br/>
+<button id="parseLogBtn">解析</button>
+<br/>
+<span>结果：</span>
+<p id="resultStr"></p>
+</body>
+</html>

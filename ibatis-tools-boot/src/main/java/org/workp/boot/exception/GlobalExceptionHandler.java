@@ -28,6 +28,16 @@ public class GlobalExceptionHandler {
         return result;
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result illegalArgumentException(IllegalArgumentException e) {
+        logger.error("非法参数异常 ", e);
+        Result result = new Result();
+        result.setCode("90000");
+        result.setMessage("非法参数异常");
+        return result;
+    }
+
     @ExceptionHandler(InvalidFormatException.class)
     @ResponseStatus(HttpStatus.OK)
     public Result invalidFormatException(InvalidFormatException e) {

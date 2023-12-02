@@ -73,7 +73,7 @@ public class IBatisLog {
         String preparedExecutedSql = ""; // select count(1) from table where a = ? and b = ?
         String paramsWithTypeStr = ""; // 1(Integer), ttt(String), 2022-02-22(Date)
         Pattern executedStartPatt = Pattern.compile("(select|update|insert|delete)");
-        Pattern paramStartPatt = Pattern.compile("(Parameters:)");
+        Pattern paramStartPatt = Pattern.compile("(Parameters:|===>)");
         Matcher preparedExecutedMat = executedStartPatt.matcher(sqlLog);
         Matcher paramMat = paramStartPatt.matcher(sqlLogParam);
         if (preparedExecutedMat.find()) {
@@ -81,7 +81,7 @@ public class IBatisLog {
             if (count == 0) return preparedExecutedSql;
         }
         if (paramMat.find()) {
-            paramsWithTypeStr = sqlLogParam.substring(paramMat.end());
+            paramsWithTypeStr = sqlLogParam.substring(paramMat.end()).trim();
         }
         // ["1(Integer)","ttt(String)",...]
         List<String> paramWithTypeList = StrUtil.split(paramsWithTypeStr, PARAM_SPILT, -1, true, false);

@@ -8,6 +8,13 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    enabled: true
+    encoding: utf-8
+    prefix: classpath:/templates/
+    cache: false
+    mode: HTML
+    suffix: .html
 #eureka:
 #  client:
 #    registerWithEureka: true # 是否注册到eureka服务，默认为true，当前已为eureka server，且单点eureka，故配置为false
@@ -28,4 +35,3 @@ pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
-
